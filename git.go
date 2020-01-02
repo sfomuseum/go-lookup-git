@@ -1,10 +1,10 @@
-package lookup
+package git
 
 import (
 	"bytes"
 	"context"
 	"github.com/sfomuseum/go-lookup"
-	"gopkg.in/src-d/go-git.v4"
+	gogit "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing/object"
 	"gopkg.in/src-d/go-git.v4/storage/memory"
 	"io/ioutil"
@@ -29,7 +29,7 @@ func (l *GitLookerUpper) Open(ctx context.Context, uri string) error {
 
 func (l *GitLookerUpper) Append(ctx context.Context, lu lookup.Catalog, append_funcs ...lookup.AppendLookupFunc) error {
 
-	r, err := git.Clone(memory.NewStorage(), nil, &git.CloneOptions{
+	r, err := gogit.Clone(memory.NewStorage(), nil, &gogit.CloneOptions{
 		URL: l.uri,
 	})
 
