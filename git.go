@@ -3,7 +3,6 @@ package git
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"github.com/sfomuseum/go-lookup"
 	gogit "gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
@@ -24,8 +23,7 @@ type GitLookerUpper struct {
 
 func NewGitLookerUpper(ctx context.Context) lookup.LookerUpper {
 
-	ref_uri := fmt.Sprintf("refs/remotes/origin/%s", DEFAULT_BRANCH)
-	ref := plumbing.NewBranchReferenceName(ref_uri)
+	ref := plumbing.NewBranchReferenceName(DEFAULT_BRANCH)
 
 	l := &GitLookerUpper{
 		ref: ref,
@@ -47,8 +45,7 @@ func (l *GitLookerUpper) Open(ctx context.Context, uri string) error {
 	branch := q.Get("branch")
 
 	if branch != "" {
-		ref_uri := fmt.Sprintf("refs/remotes/origin/%s", branch)
-		ref := plumbing.NewBranchReferenceName(ref_uri)
+		ref := plumbing.NewBranchReferenceName(branch)
 		l.ref = ref
 	}
 
