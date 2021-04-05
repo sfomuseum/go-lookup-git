@@ -9,18 +9,18 @@ import (
 	"testing"
 )
 
-type Properties struct {
+type properties struct {
 	Id   int64  `json:"wof:id"`
 	Name string `json:"wof:name"`
 }
 
-type Feature struct {
-	Properties Properties `json:"properties"`
+type feature struct {
+	Properties properties `json:"properties"`
 }
 
 func AppendFunc(ctx context.Context, c lookup.Catalog, fh io.ReadCloser) error {
 
-	var f *Feature
+	var f *feature
 
 	dec := json.NewDecoder(fh)
 	err := dec.Decode(&f)
