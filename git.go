@@ -3,10 +3,11 @@ package git
 import (
 	"bytes"
 	"context"
-	"github.com/sfomuseum/go-lookup"
 	gogit "github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/go-git/go-git/v5/storage/memory"
+	"github.com/sfomuseum/go-lookup"
 	"io/ioutil"
 	"log"
 	"net/url"
@@ -30,9 +31,9 @@ func init() {
 	}
 
 	for _, s := range schemes {
-		
+
 		err := lookup.RegisterLookerUpper(ctx, s, NewGitLookerUpper)
-		
+
 		if err != nil {
 			panic(err)
 		}
