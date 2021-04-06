@@ -3,8 +3,8 @@ package git
 import (
 	"context"
 	"encoding/json"
-	"github.com/sfomuseum/go-lookup"
 	"github.com/sfomuseum/go-lookup/catalog"
+	"github.com/sfomuseum/go-lookup/iterator"
 	"io"
 	"testing"
 )
@@ -18,7 +18,7 @@ type feature struct {
 	Properties properties `json:"properties"`
 }
 
-func AppendFunc(ctx context.Context, c lookup.Catalog, fh io.ReadCloser) error {
+func AppendFunc(ctx context.Context, c catalog.Catalog, fh io.ReadCloser) error {
 
 	var f *feature
 
@@ -39,7 +39,7 @@ func TestGitLookerUpper(t *testing.T) {
 
 	ctx := context.Background()
 
-	lu, err := NewGitLookerUpper(ctx, "https://github.com/sfomuseum-data/sfomuseum-data-maps.git")
+	lu, err := iterator.NewIterator(ctx, "https://github.com/sfomuseum-data/sfomuseum-data-maps.git")
 
 	if err != nil {
 		t.Fatalf("Failed to create new GitLookerUpper, %v", err)
